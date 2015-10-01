@@ -4,6 +4,8 @@
 # Post-install Setup
 ###############################################################################
 #
+# Usage: sudo sh setup.sh <username>
+#
 # Run from your home!
 #
 # 1. Script Setup
@@ -82,7 +84,7 @@ install_package python-dev
 install_package ncurses-dev wget
 if [ ! `vim --version | grep +python | wc -l` -eq 1 ]
 then
-    "ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2" tar xvjf vim-7.4.tar.bz2
+    wget "ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2" && tar xvjf vim-7.4.tar.bz2
     cd vim74
     ./configure --with-features=huge --enable-pythoninterp \
                 --with-python-config-dir=/usr/lib/python2.7/\
@@ -98,7 +100,7 @@ install_package python-pip
 # Powerline
 if [ ! `pip freeze | grep powerline | wc -l` -eq 1 ]
 then
-    su -c "pip install --user git+git://github.com/powerline/powerline" -s /bin/bash pmjones
+    sudo -H -u $1 -c 'pip install --user git+git://github.com/powerline/powerline'
     echo "powerline has been installed!"
 else
     echo "powerline is already present, skipping..."
@@ -127,14 +129,14 @@ install_package rxvt-unicode-256color
 URXVT_EXTENSIONS="/usr/lib/urxvt/perl/clipboard \
                   /usr/lib/urxvt/perl/keyboard-select \
                   /usr/lib/urxvt/perl/url-select"
-if [ `ls $URXVT_EXTENSIONS  2>/dev/null | wc -l` -eq 3 ];
+if [ `ls $URXVT_EXTENSIONS 2>/dev/null | wc -l` -eq 3 ]
 then
-    echo 'urxvt extensions have been installed, skipping...'
+    echo "urxvt extensions have been installed, skipping..."
 else
     git clone --quiet https://github.com/muennich/urxvt-perls 2>&1
     mv urxvt-perls/clipboard \
        urxvt-perls/keyboard-select \
-       urxvt-perls/url-select  /usr/lib/urxvt/perl/
+       urxvt-perls/url-select /usr/lib/urxvt/perl/
     rm -fr urxvt-perls
     echo "urxvt-perls installed!"
 fi
@@ -143,6 +145,7 @@ fi
 # WM
 ################################################################################
 install_package i3
+install_package i3blocks
 # Default to .xinitrc as the WM init file
 if [ -f /etc/slim.conf ]
 then
@@ -158,14 +161,34 @@ fi
 ################################################################################
 # The concept for the configs is get the repo and then determine what files are
 # needed, then remove it once all of the files have been copied
-git clone --quiet https://github.com/pmjonesg/dotfiles 2>&1
+sudo -H -u $1 /bin/bash -c 'git clone --quiet https://github.com/pmjonesg/dotfiles 2>&1'
 
 # .vimrc
+if [ ! -d $USER_HOME/.vim/bundle/vundle ]
+then
+    git clone --quiet https://github.com/VundleVim/Vundle.vim.git $USER_HOME/.vim/bundle/vundle 2>&1
+    echo "Vundle was installed!"
+fi
 check_config .vimrc
 # Install plugins
 #vim +PluginInstall
 #.tmux.conf
 check_config .tmux.conf
+# .Xresources
+check_config .Xresources
+# .xinitrc
+check_config .xinitrc
+# .i3
+if [ ! -d $USER_HOME/.i3 ]
+then
+    mkdir $USER_HOME/.i3
+    mv dotfiles/.i3/* $USER_HOME/.i3
+    echo 'deb http://ftp.de.debian.org/debian sid main' >> /etc/apt/sources.list
+    apt-get update
+    install_package rofi
+fi
+
+# Cleanup
 rm -rf dotfiles
 
 
@@ -178,8 +201,8 @@ install_package fonts-inconsolata
 # Powerline
 if [ ! -d $USER_HOME/.fonts ]
 then
-    git clone --quiet https://github.com/powerline/fonts $USER_HOME/fonts 2>&1
-    cd $USER_HOME/fonts && su -c "./install.sh" -s /bin/bash pmjones
+    sudo -H -u $1 /bin/bash -c 'git clone --quiet https://github.com/powerline/fonts $USER_HOME/fonts 2>&1'
+    cd $USER_HOME/fonts && sudo -H -u $1 /bin/bash -c './install.sh'
     cd $USER_HOME && rm -rf fonts
     echo "Powerline fonts installed!"
 else
