@@ -1,0 +1,15 @@
+session_name: pkb01
+windows:
+        - window_name: sysadmin
+          shell_command_before:
+                - cd ~/PKB01
+          panes:
+                - shell_command:
+                  - echo "You are in $(pwd)"
+                  - echo 'Remember to put on your sys admin hat!'
+        - window_name: dev
+          shell_command_before:
+                - cd ~/PKB01/src/
+          panes:
+                - shell_command:
+                  - em ~/PKB01/src/
