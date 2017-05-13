@@ -152,9 +152,13 @@ then
     sed -i -e 's/^login_cmd/#login_cmd/' /etc/slim.conf
     echo "slim detected, login_cmd has been disabled in order to start session from .xinitrc"
 fi
-# Install i3 gaps patch
 
-
+# Install i3 gaps
+git clone https://www.github.com/Airblader/i3 i3-gaps
+cd i3-gaps
+mkdir -p build && cd build/
+../configure
+make && make install
 
 ################################################################################
 # Configs
