@@ -1,10 +1,6 @@
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
-" Get rid of vi compatibility
-set nocompatible
-" Avoid modelines exploit 
-
 " Better copy & paste
 set pastetoggle=<F2>
 set clipboard=unnamed
@@ -32,9 +28,6 @@ map <Leader>m <esc>:tabnext<CR>
 map <Leader>tn <esc>:tabnew<CR>
 map <Leader>tc <esc>:tabclose<CR>
 
-" Easy close
-map <Leader>q :q!<CR>
-
 " sort block of code
 vnoremap <Leader>s :sort<CR>
 
@@ -43,22 +36,26 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Show whitespace
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%80v', 100)
+" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+" au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Color scheme
 set t_Co=256
-colorscheme Tomorrow
+
+" Highlight color
+set hlsearch
+hi Search ctermbg=White
+set lcs+=space:·
 
 " Enable syntax highlighting
 filetype off
 filetype plugin indent on
-syntax on
 
 " Showing line numbers and length
 set number
-" set tw=79
-" set nowrap
+set relativenumber
+set tw=120
+set nowrap
 " set fo-=t
 " set colorcolumn=80
 " highlight ColorColumn ctermbg=233
@@ -93,185 +90,143 @@ set noswapfile
 " statusline to display line and column
 set statusline=%F\ %l\:%c
 
-" Close Omni-Completion tip window
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-autocmd CompleteDone * pclose
+" close buffer, not tab
+nmap <Leader>q :bd<CR>
 
+" debug statements
+nmap <Leader>d O# DEBUG<ESC>
+nmap <Leader>D o# ENDDEBUG<ESC>
 
 " Runtime path setup for Vundle
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " =============================================================================
-"  IDE
+"  Python IDE
 " =============================================================================
-
-" -----------------------------------------------------------------------------
-" Look
-" -----------------------------------------------------------------------------
 " All the colors!
 Plugin 'flazz/vim-colorschemes'
-" Powerline
-set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim/
-Plugin 'powerline/powerline.git'
-let g:Powerline_symbols = "fancy"
-set laststatus=2
-" Custom Statusline
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" Open tags in new tab
-nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
-
-" -----------------------------------------------------------------------------
-" Tmux Integration
-" -----------------------------------------------------------------------------
 " Proper .tmux.conf editing
 Plugin 'tmux-plugins/vim-tmux'
 " tmux navigation
 Plugin 'christoomey/vim-tmux-navigator'
+" vimwiki
+Plugin 'vimwiki/vimwiki'
+
 " Autosave on leave
 let g:tmux_navigator_save_on_switch = 1
 
-" -----------------------------------------------------------------------------
-" Navigation
-" -----------------------------------------------------------------------------
-" NERDTree
-Plugin 'scrooloose/nerdtree'
-" Start NERDTree if no files have been specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Easy access
-map <Leader>t :NERDTreeMirror<CR>
+" Powerline
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+Plugin 'powerline/powerline.git'
+let g:airline_powerline_fonts = 1
+let g:Powerline_symbols = "unicode"
+set laststatus=2
 
-" easymotions
-Plugin 'easymotion/vim-easymotion'
+" Syntastic
+Plugin 'vim-syntastic/syntastic'
 
-" -----------------------------------------------------------------------------
-" Searching
-" -----------------------------------------------------------------------------
 " Ctrl-P
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_max_height = 40
 let g:ctrlp_max_files = 0
-let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_follow_symlinks = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 if exists("g:ctrl_user_command")
-      unlet g:ctrlp_user_command
-  endif
-" set wildignore+=*.pyc,*.java
+    unlet g:ctrlp_user_command
+endif
 
-" -----------------------------------------------------------------------------
-" Autocompletion
-" -----------------------------------------------------------------------------
 " YouCompleteMe
+" Plugin 'Valloric/YouCompleteMe'
+" let g:ycm_collect_identifiers_from_tags_files = 0
+"
+" Autocompletion
+" Plugin 'shougo/deoplete.nvim'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'zchee/deoplete-jedi'
 Plugin 'Valloric/YouCompleteMe'
-" Use first python executable found in PATH (useful for virtual environments)
-let g:ycm_python_binary_path = 'python'
-" GoToDeclaration remap
-nnoremap <Leader>je :YcmCompleter GoToDeclaration<CR>
-" GoToDefinition remap
-nnoremap <Leader>jd :YcmCompleter GoToDefinition<CR>
-" GetType remap
-nnoremap <Leader>jt :YcmCompleter GetType<CR>
-" GetDoc remap
-nnoremap <Leader>jg :YcmCompleter GetDoc<CR>
-" Symbols
-let g:ycm_error_symbol = 'EE'
-let g:ycm_warning_symbol = 'WW'
 
-" Add snippets path
-set runtimepath+=$HOME/.vim/UltiSnips/
-" Track the engine
-Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use 
-" https://github.com/Valloric/YouCompleteMe.
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-" SuperTab (middle layer as a work-around for tab incompatibility with YCM)
-Plugin 'ervandew/supertab'
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsListSnippets = "<c-tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" path config
-let g:UltiSnipsSnippetDir = "~/.vim/UltiSnips"
-let g:UltiSnipsSnippetDirectories = ["~/.vim/UltiSnips"]
-
-" Emmet for easy front-end key bindings
-Plugin 'mattn/emmet-vim'
-
-" Surround
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-
-" -----------------------------------------------------------------------------
-" Syntax Checking
-" -----------------------------------------------------------------------------
-" Syntastic
-Plugin 'scrooloose/syntastic'
-" disable syntastic on the statusline
-let g:statline_syntastic = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-" easy disable (in case performance is a problem)
-map <Leader>h :SyntasticToggleMode<CR>
-
-" -----------------------------------------------------------------------------
-" Python Specific
-" -----------------------------------------------------------------------------
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-" Style Checker
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 " Flake8
 Plugin 'nvie/vim-flake8'
+" call flake8#Flake8UnplaceMarkers()
+autocmd BufWritePost *.py call Flake8()
+let g:flake8_show_quickfix=1
+let g:flake8_show_in_file=1
+let g:flake8_error_marker='EE'
+let g:flake8_warning_marker='WW'
 
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-" Syntax Checker
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-let g:syntastic_python_checkers = ['pyflakes']
-" easyTags
-" Plugin 'xolox/vim-misc'
-" Plugin 'xolox/vim-easytags'
-" Follow symbolic links
-" let g:easytags_resolve_links = 1
-" Run asynchronously, don't block vim (ctags runs in the foreground by
-" default)
-" let g:easytags_async = 1
+" Scratch buffer
+Plugin 'mtth/scratch.vim'
 
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-" Debugging Tools
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-" Breakpoint macro
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+Plugin 'majutsushi/tagbar'
+nmap <Leader>b :TagbarToggle<CR>
+nnoremap <Leader>c :CtrlPTag<CR>
+
+" Tag maps
+nmap <Leader>l :ts<CR>
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Open tags in new tab
+nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
+
+" The godsend
+Plugin 'vim-scripts/EasyGrep'
+
+" Nice diffs
+Plugin 'chrisbra/vim-diff-enhanced'
+
+" Source Tree
+Plugin 'scrooloose/nerdtree'
+" Default to NERDTree when opening a dir
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" Easy bind
+map <C-n> :NERDTreeToggle<CR>
+" Close if only NERDTree open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Stack of yanks
+Plugin 'maxbrunsfeld/vim-yankstack'
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
+" Snippets
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+set rtp+=~/.vim/UltiSnips/
+Plugin 'honza/vim-snippets'
+" Python 3
+let g:UltiSnipsUsePythonVersion = 3
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" Debugging
+map <Leader>db Oimport ipdb; ipdb.set_trace()<ESC>
+
 " Python folding
 set nofoldenable
-" CVS Integration
-" Plugin 'vcscommand.vim'
 
-" -----------------------------------------------------------------------------
-" Misc.
-" -----------------------------------------------------------------------------
-" vimwiki
-Plugin 'vimwiki/vimwiki'
+" Modern selection
+Plugin 'terryma/vim-expand-region'
 
-" -----------------------------------------------------------------------------
-" Javascript Specific
-" -----------------------------------------------------------------------------
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-" Grunt
-" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Plugin 'thomasvs/grunt.vim'
+" Docker support
+Plugin 'ekalinin/Dockerfile.vim'
+
+
+" =============================================================================
+"  Note Taking
+" =============================================================================
+Plugin 'jceb/vim-orgmode'

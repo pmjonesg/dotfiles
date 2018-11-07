@@ -1,66 +1,66 @@
-! font settings --------------------------------------------------------------
-
-Xft.autohint: true
-Xft.antialias: true
-Xft.hinting: true
-Xft.hintstyle: hintslight
-!Xft.dpi: 96
-Xft.rgba: rgb
-Xft.lcdfilter: lcddefault
-
-! xscreensaver ---------------------------------------------------------------
-
-!font settings
-xscreensaver.Dialog.headingFont:        -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
-xscreensaver.Dialog.bodyFont:           -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
-xscreensaver.Dialog.labelFont:          -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
-xscreensaver.Dialog.unameFont:          -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
-xscreensaver.Dialog.buttonFont:         -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
-xscreensaver.Dialog.dateFont:           -*-fixed-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.passwd.passwdFont:         -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
-!general dialog box (affects main hostname, username, password text)
-xscreensaver.Dialog.foreground:         #101010
-xscreensaver.Dialog.background:         #D8D8D8
-xscreensaver.Dialog.topShadowColor:     #D8D8D8
-xscreensaver.Dialog.bottomShadowColor:  #D8D8D8
-xscreensaver.Dialog.Button.foreground:  #101010
-xscreensaver.Dialog.Button.background:  #E5E5E5
-!username/password input box and date text colour
-xscreensaver.Dialog.text.foreground:    #101010
-xscreensaver.Dialog.text.background:    #E5E5E5
-xscreensaver.Dialog.internalBorderWidth:24
-xscreensaver.Dialog.borderWidth:        0
-xscreensaver.Dialog.shadowThickness:    2
-!timeout bar (background is actually determined by Dialog.text.background)
-xscreensaver.passwd.thermometer.foreground:  #101010
-xscreensaver.passwd.thermometer.background:  #2E2E2E
-xscreensaver.passwd.thermometer.width:       8
-
-! Appearance
-URxvt.scrollBar: False
-
-!copy and paste
-URxvt.perl-lib: /usr/lib/urxvt/perl
-URxvt.perl-ext-common: ...,clipboard,keyboard-select
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-s: perl:keyboard-select:search
-URxvt.clipboard.autocopy: true
-URxvt.keysym.M-c: perl:clipboard:copy
-URxvt.keysym.M-c: perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-
-! Appearance
-! font
-URxvt.font:     xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
-!URxvt.font: 	xft:Inconsolata:pixelsize=14:antialias=true:hinting=true
-!  - use xft for drawing fonts
-!  - cursor
-!URxvt*cursorColor: #DCDCCC
-!  - pseudo transparency!
-URxvt.transparent: true
-URxvt.tintColor: white
-URxvt.shading: 20
-
+! ! font settings --------------------------------------------------------------
+! 
+! Xft.autohint: true
+! Xft.antialias: true
+! Xft.hinting: true
+! Xft.hintstyle: hintslight
+! !Xft.dpi: 96
+! Xft.rgba: rgb
+! Xft.lcdfilter: lcddefault
+! 
+! ! xscreensaver ---------------------------------------------------------------
+! 
+! !font settings
+! xscreensaver.Dialog.headingFont:        -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
+! xscreensaver.Dialog.bodyFont:           -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
+! xscreensaver.Dialog.labelFont:          -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
+! xscreensaver.Dialog.unameFont:          -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
+! xscreensaver.Dialog.buttonFont:         -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
+! xscreensaver.Dialog.dateFont:           -*-fixed-medium-r-*-*-12-*-*-*-*-*-*-*
+! xscreensaver.passwd.passwdFont:         -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
+! !general dialog box (affects main hostname, username, password text)
+! xscreensaver.Dialog.foreground:         #101010
+! xscreensaver.Dialog.background:         #D8D8D8
+! xscreensaver.Dialog.topShadowColor:     #D8D8D8
+! xscreensaver.Dialog.bottomShadowColor:  #D8D8D8
+! xscreensaver.Dialog.Button.foreground:  #101010
+! xscreensaver.Dialog.Button.background:  #E5E5E5
+! !username/password input box and date text colour
+! xscreensaver.Dialog.text.foreground:    #101010
+! xscreensaver.Dialog.text.background:    #E5E5E5
+! xscreensaver.Dialog.internalBorderWidth:24
+! xscreensaver.Dialog.borderWidth:        0
+! xscreensaver.Dialog.shadowThickness:    2
+! !timeout bar (background is actually determined by Dialog.text.background)
+! xscreensaver.passwd.thermometer.foreground:  #101010
+! xscreensaver.passwd.thermometer.background:  #2E2E2E
+! xscreensaver.passwd.thermometer.width:       8
+! 
+! ! Appearance
+! URxvt.scrollBar: False
+! 
+! !copy and paste
+! URxvt.perl-lib: /usr/lib/urxvt/perl
+! URxvt.perl-ext-common: ...,clipboard,keyboard-select
+! URxvt.keysym.M-Escape: perl:keyboard-select:activate
+! URxvt.keysym.M-s: perl:keyboard-select:search
+! URxvt.clipboard.autocopy: true
+! URxvt.keysym.M-c: perl:clipboard:copy
+! !URxvt.keysym.M-c: perl:clipboard:paste
+! URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+! 
+! ! Appearance
+! ! font
+! URxvt.font:     xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
+! !URxvt.font: 	xft:Inconsolata:pixelsize=14:antialias=true:hinting=true
+! !  - use xft for drawing fonts
+! !  - cursor
+! !URxvt*cursorColor: #DCDCCC
+! !  - pseudo transparency!
+! URxvt.transparent: true
+! URxvt.tintColor: white
+! URxvt.shading: 20
+! 
 ! Colors
 #define Molokai_foreground   #CCCCCC
 #define Molokai_black        #101010
@@ -101,56 +101,135 @@ URxvt.color12     : Molokai_light_blue
 URxvt.color13     : Molokai_light_purple
 URxvt.color14     : Molokai_light_cyan
 URxvt.color15     : Molokai_whit␖e
+! 
+! 
+! 
+! !Tomorrow
+! !#define t_background        #ffffff
+! !#define t_current_line      #efefef
+! !#define t_selection         #d6d6d6
+! !#define t_foreground        #4d4d4c
+! !#define t_comment           #8e908c
+! !#define t_red               #c82829
+! !#define t_orange            #f5871f
+! !#define t_yellow            #eab700
+! !#define t_green             #718c00
+! !#define t_aqua              #3e999f
+! !#define t_blue              #4271ae
+! !#define t_purple            #8959a8
+! !
+! !
+! !*.foreground:   t_foreground
+! !*.background:   t_background
+! !*.cursorColor:  #aeafad
+! !
+! !! Black / Grey
+! !*.color0:       #000000
+! !*.color8:       #666666
+! !
+! !! Red / Bright Red
+! !*.color1:       t_red
+! !*.color9:       #FF3334
+! !
+! !! Green + Bright Green
+! !*.color2:       t_green
+! !*.color10:      #9ec400
+! !
+! !! Yellow (Orange) + Bright Yellow (Yellow)
+! !*.color3:       t_orange
+! !*.color11:      t_yellow
+! !
+! !! Blue + Bright Blue
+! !*.color4:       t_blue
+! !*.color12:      t_blue
+! !
+! !! Magenta (Purple) + Bright Magenta
+! !*.color5:       t_purple
+! !*.color13:      #b777e0
+! !
+! !! Cyan (Aqua) + Bright Cyan
+! !*.color6:       t_aqua
+! !*.color14:      #54ced6
+! !
+! !! Light Grey (Selection) + White (Current Line)
+! !*.color7:       t_selection
+! !*.color15:      t_current_line
+
+!! Appearance
+URxvt.termName:   rxvt-unicode-256color
+URxvt.scrollBar:  false
+Xft.dpi:          96
+Xft.antialias:    true
+Xft.rgba:      	  rgb
+Xft.hinting:      true
+Xft.hintstyle:    hintslight
+
+!! Transparency settings
+URxvt.transparent:     true
+URxvt.shading:         15
+URxvt.depth:           32
+!! URxvt.inheritPixmap: true
+
+!! Fonts
+! URxvt.font:        xft:mononoki:pixelsize=12:antialias=true,xft:monospace
+! URxvt.boldFont:    xft:mononoki:pixelsize=12:weight=bold:antialias=true,xft:monospace
+! URxvt.letterSpace: -2
+! ! font
+! URxvt.font:     xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true, xft:Inconsolata for Powerline
+! URxvt.font:     xft:DejaVu Sans Mono:pixelsize=13:antialias=true:hinting=true:minspace=False, xft:Inconsolata for Powerline:minspace=False
+! URxvt.font: xft:DejaVuSansMono:pixelsize=13:antialias=true:hinting=true,xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
+! URxvt*font:       xft:Source\ Code\ Pro\ for\ Powerline,Source\ Code\ Pro\ Medium:size=11
+! URxvt*letterSpace: 0
+URxvt*font: xft:Source Code Pro for Powerline:pixelsize=14:antialias=true:hinting=true:minspace=False
+URxvt*boldFont: xft:Source Code Pro for Powerline:bold:pixelsize=14:antialias=true:hinting=true:minspace=False
+#define font1         Inconsolata LGC
+#define font2         Inconsolata Nerd Font
+#define font3         DejaVu Sans Mono Nerd Font
+#define font4         Noto Sans Mono CJK JP
+
+URxvt*letterSpace: 0
+! URxvt*font:           xft:font1:pixelsize=16, xft:font2:pixelsize=14:minspace=false, xft:font3:pixelsize=14,xft:font4:pixelsize=14
+! URxvt*boldFont:       xft:font1:bold:pixelsize=16, xft:font2:pixelsize=14:minspace=False,xft:font3:pixelsize=14,xft:font4:pixelsize=14
+! URxvt*italicFont:     xft:font1:italic:pixelsize=16, xft:font2:pixelsize=14:minspace=False,xft:font3:pixelsize=14,xft:font4:pixelsize=14
+! URxvt*boldItalicFont: xft:font1:bold:italic:pixelsize=16, xft:font2:pixelsize=14:minspace=False, xft:font3:pixelsize=14, xft:font4:pixelsize=14
+
+!URxvt.font: 	xft:Inconsolata:pixelsize=14:antialias=true:hinting=true
+!  - use xft for drawing fonts
+!  - cursor
+!URxvt*cursorColor: #DCDCCC
+!  - pseudo transparency!
+!URxvt.transparent: true
+URxvt.tintColor: white
+!URxvt.shading: 20
 
 
+!! Larger history limit
+URxvt.saveLines:  1000000
 
-!Tomorrow
-!#define t_background        #ffffff
-!#define t_current_line      #efefef
-!#define t_selection         #d6d6d6
-!#define t_foreground        #4d4d4c
-!#define t_comment           #8e908c
-!#define t_red               #c82829
-!#define t_orange            #f5871f
-!#define t_yellow            #eab700
-!#define t_green             #718c00
-!#define t_aqua              #3e999f
-!#define t_blue              #4271ae
-!#define t_purple            #8959a8
-!
-!
-!*.foreground:   t_foreground
-!*.background:   t_background
-!*.cursorColor:  #aeafad
-!
-!! Black / Grey
-!*.color0:       #000000
-!*.color8:       #666666
-!
-!! Red / Bright Red
-!*.color1:       t_red
-!*.color9:       #FF3334
-!
-!! Green + Bright Green
-!*.color2:       t_green
-!*.color10:      #9ec400
-!
-!! Yellow (Orange) + Bright Yellow (Yellow)
-!*.color3:       t_orange
-!*.color11:      t_yellow
-!
-!! Blue + Bright Blue
-!*.color4:       t_blue
-!*.color12:      t_blue
-!
-!! Magenta (Purple) + Bright Magenta
-!*.color5:       t_purple
-!*.color13:      #b777e0
-!
-!! Cyan (Aqua) + Bright Cyan
-!*.color6:       t_aqua
-!*.color14:      #54ced6
-!
-!! Light Grey (Selection) + White (Current Line)
-!*.color7:       t_selection
-!*.color15:      t_current_line
+! !! Colors:
+! URxvt.foreground: #aacccc
+! URxvt.background: #334455
+! !! black
+! URxvt.color0:     #2e1f1f
+! URxvt.color8:     #bb8899
+! !! red
+! URxvt.color1:     #aa0e50
+! URxvt.color9:     #bb8899
+! !! green
+! URxvt.color2:     #1dcc9f
+! URxvt.color10:    #1fd9a9
+! !! yellow
+! URxvt.color3:     #27c282
+! URxvt.color11:    #2cdb93
+! !! blue
+! URxvt.color4:     #7182a8
+! URxvt.color12:    #8194bf
+! !! magenta
+! URxvt.color5:     #aa5566
+! URxvt.color13:    #7f5aa1
+! !! cyan
+! URxvt.color6:     #22ddcc
+! URxvt.color14:    #669997
+! !! white
+! URxvt.color7:     #b7bbbd
+! URxvt.color15:    #d9d9d9
